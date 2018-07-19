@@ -16,22 +16,35 @@ dependencies {
 // This task is an sub class of `Sync`
 // `from/into` are methods of `Sync`
 task mySync1(type: Sync) {
+    println("----- mySync1 -----")
     from "source-dir1"
     from "source-dir2"
     into "target-dir-x"
 }
 
-// We can use `project.sync` directly
+// We can use `project.sync` directly,
+// in `doLast` block
 task mySync2() {
-    project.sync {
-        from "source-dir1"
-        from "source-dir2"
-        into "target-dir-y"
+    doLast {
+        println("----- mySync2 -----")
+        project.sync {
+            from "source-dir1"
+            from "source-dir2"
+            into "target-dir-y"
+        }
     }
 }
 
 // This is not working
+// `from/into` are just configurations, but if they are in `doFirst/doLast`, they are not run in configuration phase,
+// the `Sync` task is not configured actually.
 task mySyncNotWorking(type: Sync) {
+    println("----- mySyncNotWorking -----")
+    doFirst {
+        from "source-dir1"
+        from "source-dir2"
+        into "target-dir-z"
+    }
     doLast {
         from "source-dir1"
         from "source-dir2"
