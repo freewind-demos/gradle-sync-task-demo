@@ -1,30 +1,10 @@
 Gradle Hello World Demo
 =======================
 
-A very simple java project with gradle.
-
-Run tests:
+How to use `Sync` task. It will delete all files inside target dir before copying by default.
 
 ```
-./gradlew test
+./gradlew mySync
 ```
 
-Update Gradle Version
----------------------
-
-```
-gradle wrapper --gradle-version 4.8.1
-./gradlew -version
-```
-
-Setup in IDEA
---------------
-
-Use command line:
-
-```
-idea .
-```
-
-Or import the project directly with IDEA.
-
+Then check the `target-dir`.

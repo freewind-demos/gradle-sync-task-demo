@@ -14,6 +14,9 @@ dependencies {
 }
 
 task mySync(type: Sync) {
-    from "source-dir"
-    into "target-dir"
+    doLast {
+        from "source-dir1"
+        from "source-dir2"
+        into "target-dir"
+    }
 }
