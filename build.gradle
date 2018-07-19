@@ -13,10 +13,28 @@ dependencies {
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
 }
 
-task mySync(type: Sync) {
+// This task is an sub class of `Sync`
+// `from/into` are methods of `Sync`
+task mySync1(type: Sync) {
+    from "source-dir1"
+    from "source-dir2"
+    into "target-dir-x"
+}
+
+// We can use `project.sync` directly
+task mySync2() {
+    project.sync {
+        from "source-dir1"
+        from "source-dir2"
+        into "target-dir-y"
+    }
+}
+
+// This is not working
+task mySyncNotWorking(type: Sync) {
     doLast {
         from "source-dir1"
         from "source-dir2"
-        into "target-dir"
+        into "target-dir-z"
     }
 }
